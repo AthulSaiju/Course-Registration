@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scope/verify</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/styles.css" />
+
+    <style>
+      /* .text-container{
+            border: 1px solid white;
+            position: relative;
+            bottom: 12px;
+        } */
+
+      /* .sec1 {
+      
+        background-image: url("login-img/bg-4.jpg");
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      } */
+
+      .login-container {
+        text-align: center;
+        min-height: 100px;
+        width: 1100px;
+        /* border: 1px solid white; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 60px;
+        /* border: 1px solid gray; */
+        margin-bottom: 10px;
+      }
+
+      .login-container p {
+        letter-spacing: 3px;
+        font-size: 18px;
+        line-height: 2;
+        color: rgb(137, 137, 137);
+        /* margin-bottom: 80px; */
+      }
+
+      /* ---------------------------------------Form-------------------------------------------- */
+
+      /* ------------------------------------------------- */
+
+      .extra-container {
+        padding: 20px;
+        min-width: 500px;
+      }
+
+      .screen {
+        position: relative;
+        background: #0c0b0b;
+        border-radius: 15px;
+        height: 530px;
+        padding-bottom: 0;
+        border: 1px solid rgb(50, 50, 50);
+        display: flex;
+
+        flex-direction: column;
+      }
+
+      .screen-header {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        background: #1d1d1d;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+      }
+
+      .screen-header-left {
+        margin-right: auto;
+      }
+
+      .screen-header-button {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        margin-right: 3px;
+        border-radius: 8px;
+        background: white;
+      }
+
+      .screen-header-button.close {
+        background: #ed1c6f;
+      }
+
+      .screen-header-button.maximize {
+        background: #e8e925;
+      }
+
+      .screen-header-button.minimize {
+        background: #74c54f;
+      }
+
+      .screen-header-right {
+        display: flex;
+      }
+
+      .screen-header-ellipsis {
+        width: 3px;
+        height: 3px;
+        margin-left: 2px;
+        border-radius: 8px;
+        background: #999;
+      }
+
+      .screen-body {
+        display: flex;
+      }
+
+      .screen-body-container {
+        display: flex;
+        height: 100%; /* Full height of the viewport */
+      }
+
+      .container {
+        background-color: transparent;
+        padding: 2rem 0;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        text-align: center;
+
+        width: 100%;
+        align-self: center;
+      }
+
+      .container i {
+        font-size: 3rem;
+        color: rgb(2, 255, 10);
+
+        transition: 0.2s ease-in-out;
+      }
+      .container i:hover {
+        color: #ff0000;
+      }
+      .container p {
+        letter-spacing: normal;
+        font-size: 18px;
+      }
+
+      #timer {
+        font-size: 1rem;
+        color: #a556f6;
+        font-weight: 500;
+        margin-left: 10px;
+      }
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      .expired {
+        animation: pulse 2s infinite;
+        color: #ff4444;
+      }
+      .resend-text {
+        width: 100%;
+        /* background-color: red; */
+        position: absolute;
+        text-align: center;
+        bottom: 50px;
+
+        font-size: 0.9rem;
+        color: #b0b0b0;
+        margin: 0;
+      }
+      .resend-link {
+        color: #6665f1;
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+      .resend-link:hover {
+        color: #a556f6;
+        text-decoration: underline;
+      }
+
+      /* ---------------------Form-3----------------------------------- */
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <nav class="nav">
+        <img
+          src="scope-india-logo-bird.png"
+          alt="Apple"
+          width="38"
+          height="38"
+        />
+
+        <div class="nav-center">
+          <a th:href="@{/}" class="nav-item">Home</a>
+          <a th:href="@{/courses}" class="nav-item">Courses</a>
+          <a th:href="@{/about}" class="nav-item">About Us</a>
+          <a th:href="@{/contact}" class="nav-item">Contact Us</a>
+        </div>
+        <div class="nav-end">
+          <a th:href="@{/login}">Log in</a>
+          <form action="/register" method="get">
+            <button>Register Now</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+
+    <section class="sec1">
+      <div class="text-container">
+        <p class="support">SCOPE INDIA</p>
+        <h1 class="heading">Email Verification<br /></h1>
+      </div>
+
+      <div class="login-container">
+        <!-- ----------------------------------------Form-1----------------------------------------------------------------------------- -->
+        <div class="contactUs">
+          <div class="extra-container">
+            <div class="screen">
+              <div class="screen-header">
+                <div class="screen-header-left">
+                  <div class="screen-header-button close"></div>
+                  <div class="screen-header-button maximize"></div>
+                  <div class="screen-header-button minimize"></div>
+                </div>
+                <div class="screen-header-right">
+                  <div class="screen-header-ellipsis"></div>
+                  <div class="screen-header-ellipsis"></div>
+                  <div class="screen-header-ellipsis"></div>
+                </div>
+              </div>
+
+              <div class="wrapper">
+                <!-----------------------------------<form>-------------------------------------------------- -->
+
+                <div class="container">
+                  <i class="bi bi-envelope-at-fill"></i>
+                  <p style="font-size: 18px; margin-top: 10px">
+                    Please Verify your mail
+                  </p>
+                  <p
+                    style="
+                      font-size: 15px;
+                      margin-top: 15px;
+                      letter-spacing: 1px;
+                    "
+                  >
+                    You're almost there! We sent an email to
+                  </p>
+
+                  <p style="margin-top: 15px; color: #6665f1">
+                    <strong th:text="${userEmail}"></strong>
+                  </p>
+
+                  <p
+                    style="
+                      font-size: 15px;
+                      margin-top: 25px;
+                      letter-spacing: 1px;
+                    "
+                  >
+                    Just click on the link to complete your verification.<br />
+                    If you don't see it, check your
+                    <strong style="color: rgba(255, 0, 0, 0.588)">spam</strong>
+                    folder.
+                  </p>
+
+                  <div class="resend-text">
+                    Got into any Troubles?
+                    <a th:href="@{/contact}" class="resend-link">Contact Us</a>
+                    <span id="timer"></span>
+                  </div>
+                </div>
+
+                <!-----------------------------------</form>-------------------------------------------------- -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec2">
+      <div class="green-box">
+        <footer class="footer">
+          <div class="waves">
+            <div class="wave" id="wave1"></div>
+            <div class="wave" id="wave2"></div>
+            <div class="wave" id="wave3"></div>
+            <div class="wave" id="wave4"></div>
+          </div>
+          <ul class="social-icon">
+            <li class="social-icon__item">
+              <a
+                class="social-icon__link"
+                href="https://www.facebook.com/scopeindia.org/"
+              >
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+            <li class="social-icon__item">
+              <a
+                class="social-icon__link"
+                href="https://youtube.com/@scope_india?si=zk3vk7qNZpd_89t8"
+              >
+                <ion-icon name="logo-youtube"></ion-icon>
+              </a>
+            </li>
+            <li class="social-icon__item">
+              <a
+                class="social-icon__link"
+                href="https://in.linkedin.com/company/scope-india-software-and-networking-education"
+              >
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
+            <li class="social-icon__item">
+              <a
+                class="social-icon__link"
+                href="https://www.instagram.com/scopeindia/"
+              >
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+          </ul>
+          <ul class="menu">
+            <li class="menu__item">
+              <a class="menu__link" th:href="@{/}">Home</a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" th:href="@{/about}">About</a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" th:href="@{/courses}">Courses</a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" th:href="@{/contact}">Contact</a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" th:href="@{/register}">Register</a>
+            </li>
+          </ul>
+          <p>&copy;2024 SCOPE INDIA | All Rights Reserved</p>
+        </footer>
+      </div>
+    </section>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<!-- 
+<form th:action="@{/sendOtp}" method="post">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <button type="submit">Send OTP</button>
+</form> -->

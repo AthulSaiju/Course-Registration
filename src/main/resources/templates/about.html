@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scope</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome CDN link -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/styles.css" />
+
+    <style>
+      .about-container {
+        /* margin-top: 195px; */
+        text-align: center;
+        min-height: 100px;
+        width: 1100px;
+        /* border: 1px solid white; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 60px;
+        /* border: 1px solid gray; */
+        margin-bottom: 10px;
+      }
+
+      .about-container p {
+        letter-spacing: 3px;
+        font-size: 18px;
+        line-height: 2;
+        color: rgb(137, 137, 137);
+        /* margin-bottom: 80px; */
+      }
+
+      .grid-container {
+        min-height: 100px;
+        width: 100%;
+        /* border: 1px solid red; */
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-top: 80px;
+        /* margin-bottom: 50px; */
+      }
+
+      .grid-item {
+        height: 280px;
+        /* border: 2px solid blue; */
+        background-color: rgb(19, 19, 19);
+        padding: 10px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        transition: 0.3s ease-in-out;
+      }
+
+      .grid-item:hover {
+        transform: scale(1.05);
+      }
+
+      .grid-item i {
+        font-size: 3rem;
+      }
+      .grid-item p {
+        font-size: 15px;
+        line-height: normal;
+        letter-spacing: 0;
+        padding-bottom: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <nav class="nav">
+        <img
+          src="scope-india-logo-bird.png"
+          alt="Apple"
+          width="38"
+          height="38"
+        />
+
+        <div class="nav-center">
+          <a th:href="@{/}" class="nav-item">Home</a>
+          <a th:href="@{/courses}" class="nav-item">Courses</a>
+          <a th:href="@{/about}" class="nav-item active">About Us</a>
+          <a th:href="@{/contact}" class="nav-item">Contact Us</a>
+        </div>
+
+        <div th:unless="${log}" class="nav-end">
+          <a th:href="@{/login}">Log in</a>
+          <form action="/register" method="get">
+            <button>Register Now</button>
+          </form>
+        </div>
+
+        <div th:if="${log}" class="nav-end">
+          <a th:href="@{/logout}">Log out</a>
+          <form action="/dashboard" method="get">
+            <button style="background: #02f723">Dashboard</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+
+
+
+    <section class="sec1">
+
+
+      <div class="text-container">
+        <p class="support">SCOPE INDIA</p>
+        <h1 class="heading">
+          Know More<br />
+          About Us.
+        </h1>
+      </div>
+
+
+      <div class="about-container">
+        <p>
+          One of the best Training Destination for Software, Networking and
+          Cloud Computing courses in India with 17 years of Industrial
+          experience.
+        </p>
+
+        <div class="grid-container">
+          <div class="grid-item">
+            <i class="fa-solid fa-user-group"></i>
+            <!-- <i class="fa-solid fa-users-line"></i> -->
+            <h2>Experience</h2>
+            <p>
+              Over 17 years of Industrial Expertise in delivering high-quality
+              training.
+            </p>
+          </div>
+
+          <div class="grid-item">
+            <i class="fa-regular fa-star"></i>
+            <h2>Career</h2>
+            <p>
+              Our courses are designed to ensure successful job placements, with
+              strong industry connections
+            </p>
+          </div>
+
+          <div class="grid-item">
+            <i class="fa-solid fa-globe"></i>
+            <h2>Community</h2>
+            <p>
+              Join a global community of learners, educators, and industry
+              professionals.
+            </p>
+          </div>
+
+          <div class="grid-item">
+            <i class="fa-solid fa-headphones-simple"></i>
+            <h2>Support</h2>
+            <p>
+              Our 24/7 support ensures that you have access to assistance and
+              resources anytime you need.
+            </p>
+          </div>
+        </div>
+
+        <!-- <p style="text-align: justify; margin-top: 70px;">Software, Networking, and Cloud Professional Education Centre in Kerala and Tamil Nadu from Suffix E Solutions with WORKING PROFESSIONALS oriented on-the-job TRAINING model. SCOPE INDIA provides courses for Software Programming in Python (Data Science | Artificial Intelligence 
+                | Machine Learning | Deep Learning, Data Analytics), Java, PHP, .Net, MERN, Software Testing Manual and Automation, Cloud Computing (AWS | Azure), Server Administration (MicroSoft MCSE | Linux RHCE), Networking (CCNA), DevOps, Mobile App Development in Flutter and Digital Marketing. Training with a 100% Trusted Job-Based 
+                Internship Model. SCOPE INDIA has a Strong Placement Cell that provides jobs to thousands of students every year. We assure you, you won't regret it after training from SCOPE INDIA! Register Now for 6 month Internship training program.</p> -->
+
+        <div class="about-image">
+          <img src="grey5star2.png" alt="" />
+          <p>Google 4.9 * Rated Institute</p>
+        </div>
+
+        <div class="about-last-box">
+          <div class="lbox lowbox">
+            <h1>1000+</h1>
+            <p>STUDENTS ARE TRAINED EVERY YEAR</p>
+          </div>
+          <div class="lbox">
+            <h1>30+</h1>
+            <p>COMPUTER COURSES</p>
+          </div>
+          <div class="lbox lowbox">
+            <h1>95%</h1>
+            <p>STUDENTS ARE GETTING PLACED EVERY YEAR</p>
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+
+    <section class="sec2">
+      <div class="green-box">
+        <footer class="footer">
+          <div class="waves">
+            <div class="wave" id="wave1"></div>
+            <div class="wave" id="wave2"></div>
+            <div class="wave" id="wave3"></div>
+            <div class="wave" id="wave4"></div>
+          </div>
+          <ul class="social-icon">
+            <li class="social-icon__item">
+              <a
+                class="social-icon__link"
+                href="https://www.facebook.com/scopeindia.org/"
+              >
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+            <li class="social-icon__item">
+              <a
+                class="social-icon__link"
+                href="https://youtube.com/@scope_india?si=zk3vk7qNZpd_89t8"
+              >
+                <ion-icon name="logo-youtube"></ion-icon>
+              </a>
+            </li>
+            <li class="social-icon__item">
+              <a
+                class="social-icon__link"
+                href="https://in.linkedin.com/company/scope-india-software-and-networking-education"
+              >
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
+            <li class="social-icon__item">
+              <a
+                class="social-icon__link"
+                href="https://www.instagram.com/scopeindia/"
+              >
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+          </ul>
+          <ul class="menu">
+            <li class="menu__item">
+              <a class="menu__link" th:href="@{/}">Home</a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" th:href="@{/about}">About</a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" th:href="@{/courses}">Courses</a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" th:href="@{/contact}">Contact</a>
+            </li>
+            <li class="menu__item">
+              <a class="menu__link" th:href="@{/register}">Register</a>
+            </li>
+          </ul>
+          <p>&copy;2024 SCOPE INDIA | All Rights Reserved</p>
+        </footer>
+      </div>
+    </section>
+
+    
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
